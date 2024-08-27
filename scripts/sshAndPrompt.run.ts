@@ -4,10 +4,10 @@ import { exec, IExecResponse, OutputMode } from 'https://deno.land/x/exec@0.0.5/
 const serverUrl: string = await Secret.prompt('Enter serverUrl') // like in browsers there is no window.prompt(...) for passwords, so we use the library cliffy
 const serverFolder: string|null = prompt('Enter serverFolder:') // for normal fields Deno comes with window.prompt(...) like browsers do
 
-console.log(await exec(`ssh ${serverUrl} "mkdir ${serverFolder}"`))
-console.log(await exec(`scp ./ssh.run.ts ${serverUrl}:${serverFolder}/ssh.run.ts`))
+await new Deno.Command('ssh', {args: [serverUrl, `mkdir ${serverFolder}`], stdout: 'piped'}).spawn().output() // without library
+console.log(await exec(`scp ./sshAndPrompt.run.ts ${serverUrl}:${serverFolder}/sshAndPrompt.run.ts`))
 
-const response: IExecResponse = await exec(`ssh ${serverUrl} "echo $(<${serverFolder}/ssh.run.ts)"`, {output: OutputMode.Capture})
+const response: IExecResponse = await exec(`ssh ${serverUrl} "echo $(<${serverFolder}/sshAndPrompt.run.ts)"`, {output: OutputMode.Capture})
 console.log(response)
 console.log(`There are ${countLineBreaks(response.output)} linebreaks in this file.`)
 
