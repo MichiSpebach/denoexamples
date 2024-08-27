@@ -1,5 +1,6 @@
+Examples for using TypeScript for build scripts and running them with Deno.
 
-### Examples
+### Examples:
 
 [readAndWriteFiles.run.ts](./scripts/readAndWriteFiles.run.ts)
 

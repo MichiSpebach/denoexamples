@@ -1,0 +1,12 @@
+{
+	"name": "denoexamples",
+	"version": "1.0.0",
+	"description": "This package.json is not needed for Deno and is only there to showcase the use of Deno in existing npm projects without needing to install Deno separately.",
+	"scripts": {
+		"build": "cd ./scripts && deno run --allow-all ./build.run.ts"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"deno-bin": "^1.45.1"
+	}
+}
